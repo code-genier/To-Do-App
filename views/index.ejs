@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="image/todo-icon-17.jpg" />
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="box" id="heading">
+        <h1> <%= listTitle %> </h1>
+      </div>
+    
+      <div class="box">
+        <% for (let i=0; i<newListItems.length; i++) { %>
+            <form action="/delete" method="post">
+              <!-- to delete any items we need two thing its id and the current list name
+              but we are already sending a valude of id from our checkbox submit button 
+              here v can use input type hidden [impt] -->
+                <div class="item">
+                <input type="checkbox" onclick="this.form.submit()" name = "checked" value = "<%= newListItems[i].id %>">
+                <p><%=  newListItems[i].name  %></p>
+                </div>
+                <input type="hidden" name = "listname" value="<%= listTitle %>"></input>
+            </form>
+          <% } %>
+    
+          <form class="item" action="/" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+            <!-- the value in button tells that in which dbs collection 
+            we need to enter new data -->
+            <button type="submit" name="list" value="<%= listTitle %>"> + </button> 
+          </form>
+      </div>
+</body>
+</html>
